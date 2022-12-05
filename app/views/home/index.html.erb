@@ -41,9 +41,12 @@
                         Account
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Sign Up</a></li>
-                        <li><a class="dropdown-item" href="#">Sign in</a></li>
-                        
+                      <% if user_signed_in? %>
+                        <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+                      <% else %> 
+                        <li><a class="dropdown-item" href="/users/sign_up">Sign Up</a></li>
+                        <li><a class="dropdown-item" href="/users/sign_in">Sign in</a></li>
+                      <% end %>  
                     </ul>
                 </div>
                 
@@ -65,7 +68,7 @@
           <!--- Explain what the block of code below this line is doing --->
 
           <% if user_signed_in? %>
-          <div> Welcome <%= current_user.email %> </div>
+          <div style="text-align: center;"> Welcome <%= current_user.email %> </div>
           <div class="container-fluid bg-gray my-3 justify-content-center border border-dark">
             <div class="row">
                 
@@ -73,9 +76,15 @@
                   <a href="/projects" class="btn btn-large btn-dark btn-block" role="button"> Projects Homepage</a>
                 </div>
             
-                <div class="col my-2">
-                  <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-large btn-block" %> 
-                </div>
+                
+            </div>
+
+          </div>
+        </div>
+
+          <div class="container-fluid bg-gray my-3 justify-content-center border border-dark">
+            <div class="col my-2">
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-large btn-block" %> 
             </div>
           </div>
           <% else %>
@@ -88,7 +97,7 @@
               </div>
           
               <div class="col my-2">
-                <a href="#" class="btn btn-large btn-success btn-block" role="button"> Don't have an account? Sign up here!</a>
+                <a href="/users/sign_up" class="btn btn-large btn-success btn-block" role="button"> Don't have an account? Sign up here!</a>
               </div>
           
               <div class="col my-2">

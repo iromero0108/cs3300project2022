@@ -57,8 +57,12 @@
                         Account
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Sign Up</a></li>
-                        <li><a class="dropdown-item" href="#">Sign in</a></li>
+                      <% if user_signed_in? %>
+                        <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                      <% else %> 
+                        <li><a class="dropdown-item" href="/users/sign_up">Sign Up</a></li>
+                        <li><a class="dropdown-item" href="/users/sign_in">Sign in</a></li>
+                      <% end %>  
                         
                     </ul>
                 </div>
